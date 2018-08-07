@@ -1,0 +1,22 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>tasks</ion-title>
+    <ion-buttons end>
+      <button (click)="addTask()" ion-button icon-only clear ><ion-icon name="add-circle"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <button (click)="showDetails(task)" ion-item *ngFor="let task of tasks">
+      <ion-label>{{task.title}}</ion-label>
+      <ion-toggle item-end checked="task.status?"></ion-toggle>
+    </button>
+  </ion-list>
+
+</ion-content>

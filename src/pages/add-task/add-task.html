@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Add Task</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div style="height: 40px" class="spacer"></div>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Title</ion-label>
+        <ion-input name ="Title" [(ngModel)]="task.title" type="text"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+          <ion-label>Description</ion-label>
+          <ion-input name ="Description" [(ngModel)]="task.description" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label>Status</ion-label>
+          <ion-toggle name ="Status" [(ngModel)]="task.status" checked="false"></ion-toggle>
+      </ion-item>
+  
+      <div style="height: 40px" class="spacer"></div>
+      <button  (click)="push()" ion-item block color="secondary">Add</button>
+    </ion-list>
+  
+  </ion-content>
