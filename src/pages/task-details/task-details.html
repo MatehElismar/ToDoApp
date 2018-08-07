@@ -6,20 +6,41 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="dark">
     <ion-title>Details</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <div style="width: 40px" class="spacer"></div>
-
-  <ion-card>
-    <h2>{{task.tittle}}</h2>
-    <h2>{{task.description}}</h2>
-    <h2>Estado : {{task.status}}</h2>
+  
+  <ion-card >
+        <img src="https://thumb1.shutterstock.com/display_pic_with_logo/969377/642323170/stock-vector-multitask-teamwork-performing-multiple-task-simultaneously-sale-marketing-using-tablet-642323170.jpg" alt="">
+        
+    
+    <ion-card-content>
+      <!-- Add card content here! -->
+        <ion-item>
+          <ion-label><span class="color-info">Title:  </span>{{task.data.title}}</ion-label>
+          <button (click)="update()" clear item-end ion-button circle large icon-start color="danger">
+            <ion-icon name="create"></ion-icon>
+          </button>
+          <button (click)="delete()" clear item-end ion-button circle large icon-start color="danger">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </ion-item>
+          <ion-item>
+            <ion-label><span class="color-info">Status:  </span></ion-label>
+            <ion-toggle (ionChange)="changeStatus()" readonly [(ngModel)]="task.data.status"></ion-toggle>
+          </ion-item>
+          <br>
+          <ion-item>
+            <p><span class="color-info">Description:  </span>{{task.data.description}}</p>
+          </ion-item>
+         
+        </ion-card-content> 
   </ion-card>
-
+  <div style="width: 60px" class="spacer"></div>
 </ion-content>

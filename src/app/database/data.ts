@@ -11,8 +11,9 @@ export class DataProvider {
     
   }
 
-  getTasks(){
-    return this.db.list('tasks').valueChanges()
+  getTasks(){ 
+    return this.db.list('tasks').snapshotChanges()
+    
   }
 
   addTask(task){
@@ -20,11 +21,17 @@ export class DataProvider {
 
   }
 
-  changeStatus(taskId){
-    
+  changeStatus(task){
+    return this.db.list('tasks').update(task.key, {status: task.data.status})
   }
 
-  deleteTask(){
+  updateTask(task){
+    return this.db.list('tasks').set(task.key, task.data)
+  }
+
+  deleteTask(taskKey){ 
+    //le pasamos el key para eliminarlo
+    return this.db.list('tasks').remove(taskKey)
 
   }
 

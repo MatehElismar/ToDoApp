@@ -1,7 +1,7 @@
 
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="dark">
     <ion-title>tasks</ion-title>
     <ion-buttons end>
       <button (click)="addTask()" ion-button icon-only clear ><ion-icon name="add-circle"></ion-icon></button>
@@ -13,9 +13,9 @@
 
 <ion-content padding>
   <ion-list>
-    <button (click)="showDetails(task)" ion-item *ngFor="let task of tasks">
-      <ion-label>{{task.title}}</ion-label>
-      <ion-toggle item-end checked="task.status?"></ion-toggle>
+    <button (click)="showDetails(task)" ion-item *ngFor="let task of tasks | async">
+      <ion-label>{{task.payload.val().title}}</ion-label>
+      <ion-toggle (ionChange)="changeStatus()" readonly [(ngModel)]="task.payload.val().status" checked="task.payload.val().status"></ion-toggle>
     </button>
   </ion-list>
 

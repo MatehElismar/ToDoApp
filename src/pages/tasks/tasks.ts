@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DataProvider } from '../../app/database/data';
 import { AddTaskPage } from '../add-task/add-task';
 import { TaskDetailsPage } from '../task-details/task-details';
+import { Observable } from '../../../node_modules/rxjs';
 
 
 @IonicPage()
@@ -11,14 +12,11 @@ import { TaskDetailsPage } from '../task-details/task-details';
   templateUrl: 'tasks.html',
 })
 export class TasksPage {
-  tasks:any[]
-  constructor(private modalCtrl:ModalController,private data:DataProvider,public navCtrl: NavController, public navParams: NavParams) {
+  tasks:Observable<any[]>
+
+  constructor(private data:DataProvider,public navCtrl: NavController, public navParams: NavParams) {
    //Llamamos al servicio y obtenemos las tareas
-    this.data.getTasks()
-    .subscribe(tasks=>{
-      console.log('the tasks are here')
-      this.tasks = tasks
-    }, err=>{ console.error(err) })
+    this.tasks = this.data.getTasks()
   }
 
   ionViewDidLoad() {
@@ -26,22 +24,24 @@ export class TasksPage {
   }
 
   addTask(){
-    // let modal = this.modalCtrl.create(AddTaskPage)
-    
-    // //Cuando se cierre el formulario modal
-    // modal.onDidDismiss(data=>{
-    //   //Agregamos los datos
-    //   this.data.addTask(data)
-    // })
-    // modal.present()
-  
 
     this.navCtrl.push(AddTaskPage)
   }
 
 
-  showDetails(task){
+  showDetails(taskAction){
+    var task = { key : taskAction.payload.key, data: taskAction.payload.val() }
     this.navCtrl.push(TaskDetailsPage, { task : task })
+  }
+
+  changeStatus(taskAction){
+    console.log('change')
+    var task = { key : taskAction.payload.key, data: taskAction.payload.val() }
+    this.data.changeStatus(task)
+    .then(value=>{
+      console.log('updated')
+    }, err=>{console.error(err)}
+  )
   }
 
 }
