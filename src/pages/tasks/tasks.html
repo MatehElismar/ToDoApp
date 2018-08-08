@@ -15,7 +15,7 @@
   <ion-list>
     <button (click)="showDetails(task)" ion-item *ngFor="let task of tasks | async">
       <ion-label>{{task.payload.val().title}}</ion-label>
-      <ion-toggle (ionChange)="changeStatus(task)" readonly value="task.payload.val().status"></ion-toggle>
+      <ion-toggle name="status" (ionChange)="changeStatus(task)" [(ngModel)]="task.payload.val().status"></ion-toggle>
     </button>
   </ion-list>
 

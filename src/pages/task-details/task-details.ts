@@ -32,7 +32,7 @@ export class TaskDetailsPage {
     this.data.changeStatus(this.task)
     .then(value =>{
       console.log('updated')
-    })
+    }, err=>{console.error(err)})
   }
 
 }
